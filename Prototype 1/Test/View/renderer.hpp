@@ -14,7 +14,9 @@
 #include <AppKit/AppKit.hpp>
 #include <MetalKit/MetalKit.hpp>
 #include <simd/simd.h>
+
 #include "Common.h"
+#include "Nodes/model.hpp"
 
 class Renderer
 {
@@ -22,7 +24,6 @@ public:
     Renderer( MTL::Device* pDevice );
     ~Renderer();
     void draw( MTK::View* pView );
-    void buildBuffers();
     void buildShaders();
     void buildMatrices();
     
@@ -31,15 +32,7 @@ private:
     MTL::CommandQueue*              _pCommandQueue;
     MTL::RenderPipelineState*       _pPSO;
     
-    MTL::Buffer*                    _pVertexPositionsBuffer;
-    MTL::Buffer*                    _pVertexColorsBuffer;
-    MTL::Buffer*                    _pIndexBuffer;
-    
-    simd::float3*                   vertices    = nullptr;
-    UInt32*                         indices     = nullptr;
-    
-    size_t                          numVertices = 0;
-    size_t                          numIndices  = 0;
+    Model* model;
     
     float                           time        = 0.f;
     

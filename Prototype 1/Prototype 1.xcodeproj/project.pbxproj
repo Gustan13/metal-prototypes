@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		529A1B072C34A2720042C8AB /* renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 529A1B052C34A2720042C8AB /* renderer.cpp */; };
 		529A1B0A2C34A9090042C8AB /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 529A1B092C34A9090042C8AB /* Shaders.metal */; };
+		529A1B0D2C34B2C10042C8AB /* libassimp.5.4.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 529A1B0C2C34B2C10042C8AB /* libassimp.5.4.1.dylib */; };
+		529A1B112C34B4680042C8AB /* model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 529A1B0F2C34B4680042C8AB /* model.cpp */; };
+		529A1B172C3570530042C8AB /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 529A1B152C3570530042C8AB /* mesh.cpp */; };
+		529A1B1C2C3574810042C8AB /* baoxiaoling2.obj in Resources */ = {isa = PBXBuildFile; fileRef = 529A1B1B2C3574810042C8AB /* baoxiaoling2.obj */; };
 		52BBE3062C349D9B004C6C4A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52BBE3042C349D9B004C6C4A /* main.cpp */; };
 		52BBE3092C349DC1004C6C4A /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52BBE3082C349DC1004C6C4A /* MetalKit.framework */; };
 		52BBE30D2C349DE4004C6C4A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52BBE30C2C349DE4004C6C4A /* Foundation.framework */; };
@@ -22,6 +26,12 @@
 		529A1B062C34A2720042C8AB /* renderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = renderer.hpp; sourceTree = "<group>"; };
 		529A1B082C34A33A0042C8AB /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		529A1B092C34A9090042C8AB /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		529A1B0C2C34B2C10042C8AB /* libassimp.5.4.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.5.4.1.dylib; path = ../../../../../../opt/homebrew/Cellar/assimp/5.4.1/lib/libassimp.5.4.1.dylib; sourceTree = "<group>"; };
+		529A1B0F2C34B4680042C8AB /* model.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = model.cpp; sourceTree = "<group>"; };
+		529A1B102C34B4680042C8AB /* model.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = model.hpp; sourceTree = "<group>"; };
+		529A1B152C3570530042C8AB /* mesh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mesh.cpp; sourceTree = "<group>"; };
+		529A1B162C3570530042C8AB /* mesh.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = mesh.hpp; sourceTree = "<group>"; };
+		529A1B1B2C3574810042C8AB /* baoxiaoling2.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = baoxiaoling2.obj; sourceTree = "<group>"; };
 		52BBE2F32C349D77004C6C4A /* Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52BBE3042C349D9B004C6C4A /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		52BBE3052C349D9B004C6C4A /* main.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = main.hpp; sourceTree = "<group>"; };
@@ -39,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				529A1B0D2C34B2C10042C8AB /* libassimp.5.4.1.dylib in Frameworks */,
 				52BBE30F2C349DED004C6C4A /* Metal.framework in Frameworks */,
 				52BBE30D2C349DE4004C6C4A /* Foundation.framework in Frameworks */,
 				52BBE3092C349DC1004C6C4A /* MetalKit.framework in Frameworks */,
@@ -55,6 +66,25 @@
 				529A1B062C34A2720042C8AB /* renderer.hpp */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		529A1B0E2C34B44F0042C8AB /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				529A1B0F2C34B4680042C8AB /* model.cpp */,
+				529A1B102C34B4680042C8AB /* model.hpp */,
+				529A1B152C3570530042C8AB /* mesh.cpp */,
+				529A1B162C3570530042C8AB /* mesh.hpp */,
+			);
+			path = Nodes;
+			sourceTree = "<group>";
+		};
+		529A1B182C3574480042C8AB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				529A1B1B2C3574810042C8AB /* baoxiaoling2.obj */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		52BBE2E82C349D5E004C6C4A = {
@@ -79,8 +109,10 @@
 			children = (
 				52BBE3042C349D9B004C6C4A /* main.cpp */,
 				52BBE3052C349D9B004C6C4A /* main.hpp */,
+				529A1B0E2C34B44F0042C8AB /* Nodes */,
 				52BBE3102C34A1BE004C6C4A /* Control */,
 				529A1B042C34A2620042C8AB /* View */,
+				529A1B182C3574480042C8AB /* Models */,
 				529A1B082C34A33A0042C8AB /* Common.h */,
 				529A1B092C34A9090042C8AB /* Shaders.metal */,
 			);
@@ -90,6 +122,7 @@
 		52BBE3072C349DC1004C6C4A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				529A1B0C2C34B2C10042C8AB /* libassimp.5.4.1.dylib */,
 				52BBE30E2C349DED004C6C4A /* Metal.framework */,
 				52BBE30C2C349DE4004C6C4A /* Foundation.framework */,
 				52BBE3082C349DC1004C6C4A /* MetalKit.framework */,
@@ -165,6 +198,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				529A1B1C2C3574810042C8AB /* baoxiaoling2.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +214,8 @@
 				52BBE3162C34A207004C6C4A /* view_delegate.cpp in Sources */,
 				52BBE3062C349D9B004C6C4A /* main.cpp in Sources */,
 				529A1B0A2C34A9090042C8AB /* Shaders.metal in Sources */,
+				529A1B172C3570530042C8AB /* mesh.cpp in Sources */,
+				529A1B112C34B4680042C8AB /* model.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +297,7 @@
 					"metal-cpp-extensions",
 					"metal-cpp",
 					Test,
+					/opt/homebrew/Cellar/assimp/5.4.1/include,
 				);
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainNibFile = MainMenu;
@@ -268,6 +305,10 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/opt/homebrew/Cellar/assimp/5.4.1/lib/libassimp5.4.1.dylib,
+					/opt/homebrew/Cellar/assimp/5.4.1/lib,
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
@@ -339,6 +380,7 @@
 					"metal-cpp-extensions",
 					"metal-cpp",
 					Test,
+					/opt/homebrew/Cellar/assimp/5.4.1/include,
 				);
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainNibFile = MainMenu;
@@ -346,6 +388,10 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/opt/homebrew/Cellar/assimp/5.4.1/lib/libassimp5.4.1.dylib,
+					/opt/homebrew/Cellar/assimp/5.4.1/lib,
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;

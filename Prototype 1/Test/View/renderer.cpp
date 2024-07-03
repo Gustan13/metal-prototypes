@@ -11,8 +11,11 @@ Renderer::Renderer( MTL::Device* pDevice )
 : _pDevice( pDevice->retain() )
 {
     _pCommandQueue = _pDevice->newCommandQueue();
+    
+    model = new Model(pDevice);
+    model->setModel("Models/baoxiaoling2.obj");
+    
     buildMatrices();
-    buildBuffers();
     buildShaders();
 }
 
@@ -20,8 +23,6 @@ Renderer::~Renderer()
 {
     _pCommandQueue->release();
     _pDevice->release();
-    _pVertexPositionsBuffer->release();
-    _pVertexColorsBuffer->release();
     _pPSO->release();
     
     delete uniforms;
@@ -67,37 +68,6 @@ void Renderer::buildMatrices() {
     projection.columns[3] = W;
     
     uniforms->projectionMatrix = projection;
-}
-
-void Renderer::buildBuffers() {
-    const size_t NumVertices = 4;
-    const size_t NumIndices  = 6;
-    
-    numVertices = NumVertices;
-    numIndices = NumIndices;
-    
-    vertices = new simd::float3[NumVertices] {
-        {-1,  1, 0},
-        { 1,  1, 0},
-        {-1, -1, 0},
-        { 1, -1, 0}
-    };
-    
-    indices = new UInt32[NumIndices] {
-        0, 1, 3, 0, 3, 2
-    };
-    
-    const size_t SizeOfVertexPositionsBuffer = sizeof(simd::float3) * NumVertices;
-    const size_t SizeOfIndexBuffer = sizeof(UInt32) * NumIndices;
-    
-    _pVertexPositionsBuffer = _pDevice->newBuffer(SizeOfVertexPositionsBuffer, MTL::ResourceStorageModeManaged);
-    _pIndexBuffer = _pDevice->newBuffer(SizeOfIndexBuffer, MTL::ResourceStorageModeManaged);
-    
-    memcpy(_pVertexPositionsBuffer->contents(), vertices, SizeOfVertexPositionsBuffer);
-    memcpy(_pIndexBuffer->contents(), indices, SizeOfIndexBuffer);
-    
-    _pVertexPositionsBuffer->didModifyRange(NS::Range::Make(0, _pVertexPositionsBuffer->length()));
-    _pIndexBuffer->didModifyRange(NS::Range::Make(0, _pIndexBuffer->length()));
 }
 
 void Renderer::buildShaders() {
@@ -151,11 +121,8 @@ void Renderer::draw( MTK::View* pView )
     MTL::RenderCommandEncoder* pEnc = pCmd->renderCommandEncoder( pRpd );
     
     pEnc->setRenderPipelineState(_pPSO);
-    pEnc->setVertexBuffer(_pVertexPositionsBuffer, 0, 0);
-    pEnc->setVertexBytes(uniforms, sizeof(Uniforms), 1);
 //    pEnc->setTriangleFillMode(MTL::TriangleFillModeLines);
-    
-    pEnc->drawIndexedPrimitives(MTL::PrimitiveTypeTriangle, numIndices, MTL::IndexTypeUInt32, _pIndexBuffer, 0);
+    model->render(pEnc, uniforms);
     
     pEnc->endEncoding();
     
