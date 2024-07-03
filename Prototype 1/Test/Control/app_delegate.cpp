@@ -32,6 +32,8 @@ void MyAppDelegate::applicationDidFinishLaunching( NS::Notification* pNotificati
     _pMtkView->setClearColor( MTL::ClearColor::Make( 1.0, 1.0, 1.0, 1.0 ) );
     _pMtkView->setDepthStencilPixelFormat(MTL::PixelFormatDepth32Float);
     _pMtkView->setClearDepth(1.0);
+    _pMtkView->setDepthStencilPixelFormat(MTL::PixelFormatDepth32Float);
+    _pMtkView->setClearDepth(1.0);
 
     _pViewDelegate = new MyMTKViewDelegate( _pDevice );
     _pMtkView->setDelegate( _pViewDelegate );

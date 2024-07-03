@@ -31,6 +31,7 @@ private:
     MTL::Device*                    _pDevice;
     MTL::CommandQueue*              _pCommandQueue;
     MTL::RenderPipelineState*       _pPSO;
+    MTL::DepthStencilState*         _pDSS;
     
     Model* model;
     

@@ -13,7 +13,7 @@ Renderer::Renderer( MTL::Device* pDevice )
     _pCommandQueue = _pDevice->newCommandQueue();
     
     model = new Model(pDevice);
-    model->setModel("Models/baoxiaoling2.obj");
+    model->setModel("Models/Anime_charcter.dae");
     
     buildMatrices();
     buildShaders();
@@ -48,7 +48,7 @@ void Renderer::buildMatrices() {
     vtranslation.columns[0] = { 1, 0, 0, 0};
     vtranslation.columns[1] = { 0, 1, 0, 0};
     vtranslation.columns[2] = { 0, 0, 1, 0};
-    vtranslation.columns[3] = { 0, 0, 20, 1};
+    vtranslation.columns[3] = { 0, 1, 8, 1};
     vtranslation = simd::inverse(vtranslation);
     
     uniforms->viewMatrix = vtranslation;
@@ -89,6 +89,12 @@ void Renderer::buildShaders() {
     pDesc->setFragmentFunction( pFragFn );
     pDesc->colorAttachments()->object(0)->setPixelFormat( MTL::PixelFormat::PixelFormatBGRA8Unorm_sRGB );
     pDesc->setDepthAttachmentPixelFormat(MTL::PixelFormatDepth32Float);
+    
+    MTL::DepthStencilDescriptor* pDSD = MTL::DepthStencilDescriptor::alloc()->init();
+    pDSD->setDepthCompareFunction(MTL::CompareFunction::CompareFunctionLess);
+    pDSD->setDepthWriteEnabled(true);
+    _pDSS = _pDevice->newDepthStencilState(pDSD);
+    pDSD->release();
 
     _pPSO = _pDevice->newRenderPipelineState( pDesc, &pError );
     if ( !_pPSO )
@@ -121,6 +127,9 @@ void Renderer::draw( MTK::View* pView )
     MTL::RenderCommandEncoder* pEnc = pCmd->renderCommandEncoder( pRpd );
     
     pEnc->setRenderPipelineState(_pPSO);
+    pEnc->setCullMode(MTL::CullModeBack);
+    pEnc->setFrontFacingWinding(MTL::WindingCounterClockwise);
+    pEnc->setDepthStencilState(_pDSS);
 //    pEnc->setTriangleFillMode(MTL::TriangleFillModeLines);
     model->render(pEnc, uniforms);
     

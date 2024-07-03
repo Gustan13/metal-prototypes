@@ -9,6 +9,9 @@
 
 Model::Model(MTL::Device* device) {
     this->device = device;
+    
+    texture = new Texture(device);
+    texture->setTexture("Models/textures.png");
 }
 
 void Model::setModel(const std::string filename) {
@@ -35,6 +38,11 @@ void Model::setModel(const std::string filename) {
         numVertices += scene->mMeshes[i]->mNumVertices;
     vertices = new simd::float3[numVertices];
     
+    if (textureVertices != nullptr)
+        delete textureVertices;
+    numTextVertices = numVertices;
+    textureVertices = new simd::float2[numTextVertices];
+    
     size_t vertexTrack = 0;
     
     for (int i = 0; i < scene->mNumMeshes; i++) {
@@ -53,6 +61,11 @@ void Model::setModel(const std::string filename) {
             vertices[j + vertexTrack][0] = currentMesh->mVertices[j].x;
             vertices[j + vertexTrack][1] = currentMesh->mVertices[j].y;
             vertices[j + vertexTrack][2] = currentMesh->mVertices[j].z;
+            
+            if (currentMesh->HasTextureCoords(0)) {
+                textureVertices[j + vertexTrack][0] = currentMesh->mTextureCoords[0][j].x;
+                textureVertices[j + vertexTrack][1] = currentMesh->mTextureCoords[0][j].y;
+            }
         }
         
         // ADD INDICES
@@ -74,10 +87,13 @@ void Model::setModel(const std::string filename) {
 
 void Model::buildBuffers() {
     const size_t sizeOfVertexBuffer = numVertices * sizeof(simd::float3);
+    const size_t sizeOfTxtVtxBuffer = numTextVertices * sizeof(simd::float2);
     
     vertexBuffer = device->newBuffer(sizeOfVertexBuffer, MTL::ResourceStorageModeManaged);
+    textureBuffer = device->newBuffer(sizeOfTxtVtxBuffer, MTL::ResourceStorageModeManaged);
     
     memcpy(vertexBuffer->contents(), vertices, sizeOfVertexBuffer);
+    memcpy(textureBuffer->contents(), textureVertices, sizeOfTxtVtxBuffer);
     
     for (int i = 0; i < numMeshes; i++) {
         Mesh* currentMesh = meshes[i];
@@ -90,11 +106,15 @@ void Model::buildBuffers() {
     }
     
     vertexBuffer->didModifyRange(NS::Range::Make(0, vertexBuffer->length()));
+    textureBuffer->didModifyRange(NS::Range::Make(0, textureBuffer->length()));
 }
 
 void Model::render(MTL::RenderCommandEncoder* pEnc, Uniforms* uniforms) {
     pEnc->setVertexBuffer(vertexBuffer, 0, 0);
     pEnc->setVertexBytes(uniforms, sizeof(Uniforms), 1);
+    pEnc->setVertexBuffer(textureBuffer, 0, 2);
+    
+    pEnc->setFragmentTexture(texture->texture, 0);
     
     for (int i = 0; i < numMeshes; i++) {
         pEnc->drawIndexedPrimitives(MTL::PrimitiveTypeTriangle, meshes[i]->indexAmount, MTL::IndexTypeUInt32, meshes[i]->indexBuffer, 0);

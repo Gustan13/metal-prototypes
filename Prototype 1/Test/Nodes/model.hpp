@@ -17,6 +17,7 @@
 
 #include "mesh.hpp"
 #include "Common.h"
+#include "Texture/texture.hpp"
 
 class Model {
 public:
@@ -26,13 +27,17 @@ public:
 private:
     MTL::Device* device;
     MTL::Buffer* vertexBuffer;
-    MTL::Buffer* indexBuffer;
+    MTL::Buffer* textureBuffer;
     
     Mesh** meshes;
+    simd::float2* textureVertices;
     simd::float3* vertices;
     
     size_t numMeshes = 0;
     size_t numVertices = 0;
+    size_t numTextVertices = 0;
+    
+    Texture* texture = nullptr;
     
     void buildBuffers();
 };

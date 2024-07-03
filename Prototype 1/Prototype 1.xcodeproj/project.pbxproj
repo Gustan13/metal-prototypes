@@ -13,6 +13,10 @@
 		529A1B112C34B4680042C8AB /* model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 529A1B0F2C34B4680042C8AB /* model.cpp */; };
 		529A1B172C3570530042C8AB /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 529A1B152C3570530042C8AB /* mesh.cpp */; };
 		529A1B1C2C3574810042C8AB /* baoxiaoling2.obj in Resources */ = {isa = PBXBuildFile; fileRef = 529A1B1B2C3574810042C8AB /* baoxiaoling2.obj */; };
+		529A1B202C357B670042C8AB /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 529A1B1E2C357B670042C8AB /* texture.cpp */; };
+		529A1B2B2C357CCF0042C8AB /* stbi_image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 529A1B292C357CCF0042C8AB /* stbi_image.cpp */; };
+		529A1B2D2C357EF60042C8AB /* textures.png in Resources */ = {isa = PBXBuildFile; fileRef = 529A1B2C2C357EF60042C8AB /* textures.png */; };
+		529A1B2F2C357FB00042C8AB /* Anime_charcter.dae in Resources */ = {isa = PBXBuildFile; fileRef = 529A1B2E2C357FB00042C8AB /* Anime_charcter.dae */; };
 		52BBE3062C349D9B004C6C4A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52BBE3042C349D9B004C6C4A /* main.cpp */; };
 		52BBE3092C349DC1004C6C4A /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52BBE3082C349DC1004C6C4A /* MetalKit.framework */; };
 		52BBE30D2C349DE4004C6C4A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52BBE30C2C349DE4004C6C4A /* Foundation.framework */; };
@@ -32,6 +36,12 @@
 		529A1B152C3570530042C8AB /* mesh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mesh.cpp; sourceTree = "<group>"; };
 		529A1B162C3570530042C8AB /* mesh.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = mesh.hpp; sourceTree = "<group>"; };
 		529A1B1B2C3574810042C8AB /* baoxiaoling2.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = baoxiaoling2.obj; sourceTree = "<group>"; };
+		529A1B1E2C357B670042C8AB /* texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texture.cpp; sourceTree = "<group>"; };
+		529A1B1F2C357B670042C8AB /* texture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = texture.hpp; sourceTree = "<group>"; };
+		529A1B292C357CCF0042C8AB /* stbi_image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stbi_image.cpp; sourceTree = "<group>"; };
+		529A1B2A2C357CCF0042C8AB /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		529A1B2C2C357EF60042C8AB /* textures.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textures.png; sourceTree = "<group>"; };
+		529A1B2E2C357FB00042C8AB /* Anime_charcter.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = Anime_charcter.dae; sourceTree = "<group>"; };
 		52BBE2F32C349D77004C6C4A /* Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52BBE3042C349D9B004C6C4A /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		52BBE3052C349D9B004C6C4A /* main.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = main.hpp; sourceTree = "<group>"; };
@@ -82,14 +92,35 @@
 		529A1B182C3574480042C8AB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				529A1B2E2C357FB00042C8AB /* Anime_charcter.dae */,
+				529A1B2C2C357EF60042C8AB /* textures.png */,
 				529A1B1B2C3574810042C8AB /* baoxiaoling2.obj */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
+		529A1B1D2C357B4C0042C8AB /* Texture */ = {
+			isa = PBXGroup;
+			children = (
+				529A1B1E2C357B670042C8AB /* texture.cpp */,
+				529A1B1F2C357B670042C8AB /* texture.hpp */,
+			);
+			path = Texture;
+			sourceTree = "<group>";
+		};
+		529A1B252C357C7E0042C8AB /* stb */ = {
+			isa = PBXGroup;
+			children = (
+				529A1B2A2C357CCF0042C8AB /* stb_image.h */,
+				529A1B292C357CCF0042C8AB /* stbi_image.cpp */,
+			);
+			path = stb;
+			sourceTree = "<group>";
+		};
 		52BBE2E82C349D5E004C6C4A = {
 			isa = PBXGroup;
 			children = (
+				529A1B252C357C7E0042C8AB /* stb */,
 				52BBE2F52C349D77004C6C4A /* Test */,
 				52BBE2F42C349D77004C6C4A /* Products */,
 				52BBE3072C349DC1004C6C4A /* Frameworks */,
@@ -109,6 +140,7 @@
 			children = (
 				52BBE3042C349D9B004C6C4A /* main.cpp */,
 				52BBE3052C349D9B004C6C4A /* main.hpp */,
+				529A1B1D2C357B4C0042C8AB /* Texture */,
 				529A1B0E2C34B44F0042C8AB /* Nodes */,
 				52BBE3102C34A1BE004C6C4A /* Control */,
 				529A1B042C34A2620042C8AB /* View */,
@@ -199,6 +231,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				529A1B1C2C3574810042C8AB /* baoxiaoling2.obj in Resources */,
+				529A1B2F2C357FB00042C8AB /* Anime_charcter.dae in Resources */,
+				529A1B2D2C357EF60042C8AB /* textures.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,9 +245,11 @@
 			files = (
 				529A1B072C34A2720042C8AB /* renderer.cpp in Sources */,
 				52BBE3132C34A1D1004C6C4A /* app_delegate.cpp in Sources */,
+				529A1B2B2C357CCF0042C8AB /* stbi_image.cpp in Sources */,
 				52BBE3162C34A207004C6C4A /* view_delegate.cpp in Sources */,
 				52BBE3062C349D9B004C6C4A /* main.cpp in Sources */,
 				529A1B0A2C34A9090042C8AB /* Shaders.metal in Sources */,
+				529A1B202C357B670042C8AB /* texture.cpp in Sources */,
 				529A1B172C3570530042C8AB /* mesh.cpp in Sources */,
 				529A1B112C34B4680042C8AB /* model.cpp in Sources */,
 			);
